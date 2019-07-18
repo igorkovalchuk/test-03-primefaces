@@ -50,7 +50,7 @@
 								<artifactItem>
 									<groupId>com.github.jsimone</groupId>
 									<artifactId>webapp-runner</artifactId>
-									<version>8.5.38.0</version>
+									<version>9.0.20.0</version>
 									<destFileName>webapp-runner.jar</destFileName>
 								</artifactItem>
 							</artifactItems>
@@ -82,7 +82,7 @@
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-dbcp</artifactId>
-			<version>8.5.38</version>
+			<version>9.0.20</version>
 			<scope>compile</scope>
 		</dependency>
 
