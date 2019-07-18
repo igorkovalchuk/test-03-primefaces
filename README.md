@@ -32,6 +32,8 @@ Other tasks that I had, some of them at my own discretion:
   * looking how to remove the database name and password from source codes for Heroku deployment;
   * database configuration - using ServletContextListener instead of context.xml;
   * get the problem with the UTF white space in the provided documentation, like this one: create table group1 (id integer NOT NULL); create table group2 (id integer NOT NULL);
+  * having a strange local webapp runner local issue;
+  * had a strange tomcat-dbcp class not found issue, so I need to set the scope = compile;
 
 LINKS:
 
