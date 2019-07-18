@@ -50,7 +50,7 @@
 								<artifactItem>
 									<groupId>com.github.jsimone</groupId>
 									<artifactId>webapp-runner</artifactId>
-									<version>9.0.20.0</version>
+									<version>8.5.38.0</version>
 									<destFileName>webapp-runner.jar</destFileName>
 								</artifactItem>
 							</artifactItems>

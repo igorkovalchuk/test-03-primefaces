@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DataLoaderStub {
+public class DataLoaderStub implements DataLoader {
 
-	public static List<Group> loadGroups() {
+	public List<Group> loadGroups() {
 		List<Group> groups = new ArrayList<>();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -23,7 +23,7 @@ public class DataLoaderStub {
     	return groups;
 	}
 
-	public static List<Function> loadFunctions(Group group) {
+	public List<Function> loadFunctions(Group group) {
 		String groupName = group.getName();
 
 		List<Function> functions = new ArrayList<>();
@@ -40,7 +40,7 @@ public class DataLoaderStub {
     	return functions;
 	}
 
-	public static List<Parameter> loadParameters(Function function) {
+	public List<Parameter> loadParameters(Function function) {
 		int functionId = function.getId();
 		List<Parameter> parameters = new ArrayList<>();
 
