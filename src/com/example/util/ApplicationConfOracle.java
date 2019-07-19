@@ -18,21 +18,23 @@ public class ApplicationConfOracle implements ApplicationConf {
 			pds = PoolDataSourceFactory.getPoolDataSource();
 			pds.setConnectionFactoryClassName(oracle.jdbc.pool.OracleDataSource.class.getName());
 
-			URI dbUri = new URI(System.getenv("DATABASE_URL"));
+			String strUrl = System.getenv("DATABASE_URL");
+			String url = strUrl.replace("#", "%23");
+
+			URI dbUri = new URI(url);
+
 			String port = "";
 			if (dbUri.getPort() != -1)
 				port = ":" + String.valueOf(dbUri.getPort());
-			String dbUrl = "jdbc:oracle:thin:@//" + dbUri.getHost() + port + dbUri.getPath();
-			System.err.println("DB URL ... ... ... ... ... ... ... ... ... ... ... ... ... ... " + dbUrl + ", PATH="
-					+ dbUri.getPath());
+
+			String dbUrl = "jdbc:oracle:thin:@//" + dbUri.getHost() + port;
+			System.err.println("DB URL ... ... ... ... ... ... ... ... ... ... ... ... ... ... " + dbUrl);
 			if (dbUri.getUserInfo() != null) {
 				String user = dbUri.getUserInfo().split(":")[0];
 				String password = dbUri.getUserInfo().split(":")[1];
-				//String dbName = dbUri.getPath().replace("/", "");
 
 				pds.setUser(user);
 				pds.setPassword(password);
-				//pds.setDatabaseName(dbName); // otherwise it doesn't work;
 
 				pds.setInitialPoolSize(1);
 				pds.setMaxPoolSize(20);
