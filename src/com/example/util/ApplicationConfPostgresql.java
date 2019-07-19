@@ -44,4 +44,8 @@ public class ApplicationConfPostgresql implements ApplicationConf {
     	return connectionPool.getConnection();
     }
 
+    @Override
+	public String getDatabaseDetails() {
+		return "DBCP2, PostgreSQL, " + connectionPool.getClass().getSimpleName() + ", " + connectionPool.getDriverClassName();
+	}
 }

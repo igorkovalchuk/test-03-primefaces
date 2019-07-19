@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import org.primefaces.event.SelectEvent;
 
+import com.example.util.ApplicationConfFactory;
+
 @Named
 @SessionScoped
 public class GroupsBean implements Serializable {
@@ -50,6 +52,10 @@ public class GroupsBean implements Serializable {
 
 	public void setSelectedGroup(Group selectedGroup) {
 		this.selectedGroup = selectedGroup;
+	}
+
+	public String getDatabaseDetails() {
+		return ApplicationConfFactory.getInstance().getDatabaseDetails();
 	}
 
 	private static void log(String message) {

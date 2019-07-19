@@ -8,4 +8,6 @@ public interface ApplicationConf {
 	void initialize() throws SQLException;
 
 	Connection getConnection() throws SQLException;
+
+	String getDatabaseDetails();
 }

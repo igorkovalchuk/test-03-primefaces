@@ -6,6 +6,7 @@ public class ApplicationConfFactory {
 
 	public static ApplicationConf getInstance() {
 		if (conf == null) {
+			//conf = new ApplicationConfOracle();
 			//conf = new ApplicationConfPostgresqlUCP();
 			conf = new ApplicationConfPostgresql();
 			System.err.println("Using ... ... ... ... ... " + conf.getClass().getSimpleName());

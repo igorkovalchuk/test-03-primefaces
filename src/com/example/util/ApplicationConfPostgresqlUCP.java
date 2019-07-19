@@ -53,4 +53,9 @@ public class ApplicationConfPostgresqlUCP implements ApplicationConf {
 		return pds.getConnection();
 	}
 
+	@Override
+	public String getDatabaseDetails() {
+		return "UCP, PostgreSQL, " + pds.getClass().getSimpleName() + ", " + pds.getConnectionFactoryClassName();
+	}
+
 }

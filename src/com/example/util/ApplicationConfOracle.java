@@ -50,4 +50,9 @@ public class ApplicationConfOracle implements ApplicationConf {
 		return pds.getConnection();
 	}
 
+	@Override
+	public String getDatabaseDetails() {
+		return "UCP, Oracle, " + pds.getClass().getSimpleName() + ", " + pds.getConnectionFactoryClassName();
+	}
+
 }
