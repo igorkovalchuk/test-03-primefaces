@@ -10,39 +10,43 @@ import oracle.ucp.jdbc.PoolDataSourceFactory;
 
 public class ApplicationConfPostgresqlUCP implements ApplicationConf {
 
-    private PoolDataSource pds;
+	private PoolDataSource pds;
 
-    @Override
-    public void initialize() throws SQLException {
-    	try {
-    		pds = PoolDataSourceFactory.getPoolDataSource();
-    		pds.setConnectionFactoryClassName(org.postgresql.jdbc3.Jdbc3SimpleDataSource.class.getName());
+	@Override
+	public void initialize() throws SQLException {
+		try {
+			pds = PoolDataSourceFactory.getPoolDataSource();
+			pds.setConnectionFactoryClassName(org.postgresql.jdbc3.Jdbc3SimpleDataSource.class.getName());
 
-    	    URI dbUri = new URI(System.getenv("DATABASE_URL"));
-    	    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
-    	    System.err.println("DB URL ... ... ... ... ... ... ... ... ... ... ... ... ... ... " + dbUrl + ", PATH=" + dbUri.getPath());
-    	    if (dbUri.getUserInfo() != null) {
-    	    	String user = dbUri.getUserInfo().split(":")[0];
-    	    	String password = dbUri.getUserInfo().split(":")[1];
-    	    	String dbName = dbUri.getPath().replace("/", "");
+			URI dbUri = new URI(System.getenv("DATABASE_URL"));
+			String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
+			System.err.println("DB URL ... ... ... ... ... ... ... ... ... ... ... ... ... ... " + dbUrl);
+			if (dbUri.getUserInfo() != null) {
+				String user = dbUri.getUserInfo().split(":")[0];
+				String password = dbUri.getUserInfo().split(":")[1];
+				String dbName = dbUri.getPath().replace("/", "");
 
-    	    	pds.setUser(user);
-    		    pds.setPassword(password);
-    		    pds.setDatabaseName(dbName); // otherwise it doesn't work;
+				pds.setUser(user);
+				pds.setPassword(password);
 
-    		    pds.setInitialPoolSize(2);
-    		    pds.setMaxPoolSize(20);
-    	    }
-            pds.setURL(dbUrl);
-        }
-        catch (URISyntaxException ex) {
-          ex.printStackTrace();
-        }
-    }
+				// Otherwise oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource:
+				// org.postgresql.util.PSQLException: Connection to localhost:5432 refused.
+				pds.setDatabaseName(dbName);
+				pds.setServerName(dbUri.getHost());
+				pds.setPortNumber(dbUri.getPort());
 
-    @Override
-    public Connection getConnection() throws SQLException {
-    	return pds.getConnection();
-    }
+				pds.setInitialPoolSize(2);
+				pds.setMaxPoolSize(20);
+			}
+			pds.setURL(dbUrl);
+		} catch (URISyntaxException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	@Override
+	public Connection getConnection() throws SQLException {
+		return pds.getConnection();
+	}
 
 }
