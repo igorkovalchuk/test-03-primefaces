@@ -7,14 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.util.ApplicationConf;
+import com.example.util.ApplicationConfFactory;
 
 public class DataLoaderImpl implements DataLoader {
 
 	public List<Group> loadGroups() {
 		List<Group> groups = new ArrayList<>();
 
-    	try (Connection connection = ApplicationConf.getConnectionPool().getConnection();
+    	try (Connection connection = ApplicationConfFactory.getInstance().getConnection();
     			Statement stmt = connection.createStatement();
     			ResultSet rs = stmt.executeQuery("SELECT * FROM \"GROUP_FUNCTION\""))
     	{
@@ -38,7 +38,7 @@ public class DataLoaderImpl implements DataLoader {
 		if (group == null)
 			return functions;
 
-    	try (Connection connection = ApplicationConf.getConnectionPool().getConnection();
+    	try (Connection connection = ApplicationConfFactory.getInstance().getConnection();
     			Statement stmt = connection.createStatement();
     			ResultSet rs = stmt.executeQuery("SELECT * FROM \"FUNCTIONS\" WHERE \"ID_GROUP\" = " + group.getId()))
     	{
@@ -62,7 +62,7 @@ public class DataLoaderImpl implements DataLoader {
         if (function == null)
         	return parameters;
 
-    	try (Connection connection = ApplicationConf.getConnectionPool().getConnection();
+    	try (Connection connection = ApplicationConfFactory.getInstance().getConnection();
     			Statement stmt = connection.createStatement();
     			ResultSet rs = stmt.executeQuery("SELECT * FROM \"FUN_PARAM\" WHERE \"ID_FUN\" = " + function.getId()))
     	{

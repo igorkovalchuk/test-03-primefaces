@@ -9,7 +9,6 @@ Locally:
 
 TO DO:
 
- * use UCP instead of DBCP 2;
  * use Oracle Database Express Edition instead of PostgreSQL;
  * remove redundant database data loading calls;
  * catch the ajax errors - show error messages;
@@ -21,6 +20,7 @@ CONFIGURATION TASKS:
   * installed Oracle Database Express Edition on Debian, using Vagrant;
   * configured CDI using Apache OpenWebBeans according to the native documentation;
   * configured MyFaces + PrimeFaces;
+  * configured Oracle UCP;
 
 Other tasks that I had, some of them at my own discretion:
 
@@ -32,8 +32,8 @@ Other tasks that I had, some of them at my own discretion:
   * looking how to remove the database name and password from source codes for Heroku deployment;
   * database configuration - using ServletContextListener instead of context.xml;
   * get the problem with the UTF white space in the provided documentation, like this one: create table group1 (id integer NOT NULL); create table group2 (id integer NOT NULL);
-  * having a strange local webapp runner local issue;
-  * had a strange tomcat-dbcp class not found issue, so I need to set the scope = compile;
+  * having a strange local webapp runner local issue (Heroku);
+  * had a strange tomcat-dbcp class not found issue, so I need to set the scope = compile (Heroku);
 
 LINKS:
 
