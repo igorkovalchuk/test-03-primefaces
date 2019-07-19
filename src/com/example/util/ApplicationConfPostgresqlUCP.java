@@ -19,7 +19,10 @@ public class ApplicationConfPostgresqlUCP implements ApplicationConf {
 			pds.setConnectionFactoryClassName(org.postgresql.jdbc3.Jdbc3SimpleDataSource.class.getName());
 
 			URI dbUri = new URI(System.getenv("DATABASE_URL"));
-			String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
+			String port = "";
+			if (dbUri.getPort() != -1)
+				port = ":" + String.valueOf(dbUri.getPort());
+			String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + port + dbUri.getPath();
 			System.err.println("DB URL ... ... ... ... ... ... ... ... ... ... ... ... ... ... " + dbUrl);
 			if (dbUri.getUserInfo() != null) {
 				String user = dbUri.getUserInfo().split(":")[0];
@@ -33,7 +36,8 @@ public class ApplicationConfPostgresqlUCP implements ApplicationConf {
 				// org.postgresql.util.PSQLException: Connection to localhost:5432 refused.
 				pds.setDatabaseName(dbName);
 				pds.setServerName(dbUri.getHost());
-				pds.setPortNumber(dbUri.getPort());
+				if (dbUri.getPort() != -1)
+					pds.setPortNumber(dbUri.getPort());
 
 				pds.setInitialPoolSize(2);
 				pds.setMaxPoolSize(20);
