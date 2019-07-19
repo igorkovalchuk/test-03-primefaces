@@ -19,7 +19,10 @@ public class ApplicationConfOracle implements ApplicationConf {
 			pds.setConnectionFactoryClassName(oracle.jdbc.pool.OracleDataSource.class.getName());
 
 			URI dbUri = new URI(System.getenv("DATABASE_URL"));
-			String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
+			String port = "";
+			if (dbUri.getPort() != -1)
+				port = ":" + String.valueOf(dbUri.getPort());
+			String dbUrl = "jdbc:oracle:thin:@//" + dbUri.getHost() + port + dbUri.getPath();
 			System.err.println("DB URL ... ... ... ... ... ... ... ... ... ... ... ... ... ... " + dbUrl + ", PATH="
 					+ dbUri.getPath());
 			if (dbUri.getUserInfo() != null) {
