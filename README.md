@@ -23,6 +23,7 @@ How to run it on Heroku:
 
 TO DO:
 
+ * don't reload data when selected the same row;
  * reload GroupsBean list periodically to reflect the changes in the database if any;
  * catch the ajax errors - show error messages;
  * when it loses the http connection the PrimeFaces may have an issue when selecting rows when we restore the connection;
@@ -30,12 +31,13 @@ TO DO:
  * configure Maven to deploy the war locally instead of cp;
  * use Spring Data instead of JDBC;
 
-CONFIGURATION TASKS:
+TASKS according to the requirements:
 
   * installed Oracle Database Express Edition on Debian, using Vagrant;
   * configured CDI using Apache OpenWebBeans according to the native documentation;
   * configured MyFaces + PrimeFaces;
   * using UCP + Oracle Database Express Edition;
+  * show active/all functions number;
 
 Other tasks that I had, some of them at my own discretion:
 

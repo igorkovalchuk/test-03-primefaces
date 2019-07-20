@@ -11,12 +11,14 @@ public class Function implements Serializable {
     private String name;
     private String descr;
     private Date ctime;
+    private String active;
 
-    public Function(int id, String name, String descr, Date ctime) {
+    public Function(int id, String name, String descr, Date ctime, String active) {
         this.id = id;
         this.name = name;
         this.descr = descr;
         this.ctime = ctime;
+        this.active = active;
     }
 
     public int getId() {
@@ -51,4 +53,17 @@ public class Function implements Serializable {
         this.ctime = ctime;
     }
 
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
+	public String getActiveMsg() {
+		if ("N".equals(this.active))
+			return "OFF";
+		return "ON";
+	}
 }

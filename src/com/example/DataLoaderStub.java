@@ -13,9 +13,9 @@ public class DataLoaderStub implements DataLoader {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            groups.add(new Group(1, "Group A", "", sdf.parse("2000-01-01")));
-            groups.add(new Group(15, "Group B", "", sdf.parse("1996-01-01")));
-            groups.add(new Group(20, "Group C", "", sdf.parse("2003-01-01")));
+            groups.add(new Group(1, "Group A", "", sdf.parse("2000-01-01"), 0, 0));
+            groups.add(new Group(15, "Group B", "", sdf.parse("1996-01-01"), 0, 0));
+            groups.add(new Group(20, "Group C", "", sdf.parse("2003-01-01"), 0, 0));
         } catch (ParseException ex) {
             throw new RuntimeException(ex);
         }
@@ -29,11 +29,11 @@ public class DataLoaderStub implements DataLoader {
 		List<Function> functions = new ArrayList<>();
 
         if (groupName.endsWith("A")) {
-            functions.add(new Function(1, "cos(a)", "", new Date()));
-            functions.add(new Function(2, "sin(a)", "", new Date()));
+            functions.add(new Function(1, "cos(a)", "", new Date(), null));
+            functions.add(new Function(2, "sin(a)", "", new Date(), null));
         } else if (groupName.endsWith("B")) {
-            functions.add(new Function(3, "pow(x, y) = x^y", "", new Date()));
-            functions.add(new Function(4, "f(x, y) = x/y", "", new Date()));
+            functions.add(new Function(3, "pow(x, y) = x^y", "", new Date(), null));
+            functions.add(new Function(4, "f(x, y) = x/y", "", new Date(), null));
         } else {
         }
 

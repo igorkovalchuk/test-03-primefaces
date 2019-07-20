@@ -5,21 +5,26 @@ import java.util.Date;
 
 public class Group implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private int id;
     private String name;
     private String descr;
     private Date ctime;
 
+    private int inactive;
+    private int all;
+
     public Group() {
     }
 
-    public Group(int id, String model, String descr, Date ctime) {
+    public Group(int id, String model, String descr, Date ctime, int inactive, int all) {
         this.id = id;
         this.name = model;
         this.descr = descr;
         this.ctime = ctime;
+        this.inactive = inactive;
+        this.all = all;
     }
 
     public int getId() {
@@ -54,4 +59,23 @@ public class Group implements Serializable {
         this.ctime = ctime;
     }
 
+	public int getInactive() {
+		return inactive;
+	}
+
+	public void setInactive(int inactive) {
+		this.inactive = inactive;
+	}
+
+	public int getAll() {
+		return all;
+	}
+
+	public void setAll(int all) {
+		this.all = all;
+	}
+
+	public int getActive() {
+		return this.all - this.inactive;
+	}
 }
