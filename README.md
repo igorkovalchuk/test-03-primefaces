@@ -23,7 +23,7 @@ How to run it on Heroku:
 
 TO DO:
 
- * remove redundant database data loading calls;
+ * reload GroupsBean list periodically to reflect the changes in the database if any;
  * catch the ajax errors - show error messages;
  * when it loses the http connection the PrimeFaces may have an issue when selecting rows when we restore the connection;
  * shutdown UCP gracefully;
@@ -50,6 +50,7 @@ Other tasks that I had, some of them at my own discretion:
   * having a strange local webapp runner local issue (Heroku);
   * had a strange tomcat-dbcp class not found issue, so I need to set the scope = compile (Heroku);
   * using UCP + PostgreSQL;
+  * removed redundant database data loading calls;
 
 LINKS:
 

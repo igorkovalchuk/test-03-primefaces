@@ -2,6 +2,8 @@ package com.example;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -18,6 +20,9 @@ public class GroupsBean implements Serializable {
 	private List<Group> groups;
 	private Group selectedGroup;
 
+	@Inject
+	private FunctionsBean functions;
+
 	@PostConstruct
 	public void afterCreate() {
 		log("GroupsBean afterCreate() ... ... ...");
@@ -25,12 +30,16 @@ public class GroupsBean implements Serializable {
 	}
 
 	private void reload() {
+		log("GroupsBean, load ... ... ...");
 		groups = DataLoader.getDataLoader().loadGroups();
 	}
 
 	public void onRowSelect(SelectEvent event) {
-		log("Selected Group (event) " + ((Group) event.getObject()).getName());
+		Group group = (Group) event.getObject();
+		log("Selected Group (event) " + group.getName());
 		log("Selected Group (this)  " + (this.selectedGroup != null ? this.selectedGroup.getName() : "?"));
+		functions.setSelectedFunction(null);
+		functions.reload();
 	}
 
 	public List<Group> getGroups() {
@@ -38,11 +47,6 @@ public class GroupsBean implements Serializable {
 	}
 
 	public void setGroups(List<Group> groups) {
-		/*
-		 * TO DO: we can reload it periodically here if any changes in the database,
-		 * lets say once per 5 minutes; if ((System.currentTimeMillis() - previous) > 5
-		 * * 60 * 1000) { previous = System.currentTimeMillis(); reload(); }
-		 */
 		this.groups = groups;
 	}
 
@@ -52,6 +56,7 @@ public class GroupsBean implements Serializable {
 
 	public void setSelectedGroup(Group selectedGroup) {
 		this.selectedGroup = selectedGroup;
+		log("GroupBean setSelectedGroup " + selectedGroup.getName());
 	}
 
 	public String getDatabaseDetails() {

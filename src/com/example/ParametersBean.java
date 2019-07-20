@@ -1,15 +1,15 @@
 package com.example;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.event.SelectEvent;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class ParametersBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -20,23 +20,33 @@ public class ParametersBean implements Serializable {
 	@Inject
 	private FunctionsBean functions;
 
+	/*
 	public void onRowSelect(SelectEvent event) {
-		log("ParametersBean.onRowSelect(), Selected Function: " + ((Function) event.getObject()).getName());
-		reload();
+		log("ParametersBean.onRowSelect(), Selected : " + ((Parameter) event.getObject()).getName());
 	}
+	*/
 
 	@PostConstruct
 	public void afterCreate() {
 		log("ParametersBean.afterCreate() ... ... ...");
 	}
 
-	private void reload() {
+	public void reload() {
 		if (functions != null && functions.getSelectedFunction() != null) {
 			Function function = functions.getSelectedFunction();
 			log("ParametersBean, load ... ... ... function id = " + function.getId());
 
 			parameters = DataLoader.getDataLoader().loadParameters(function);
 		}
+		else {
+			log("ParametersBean, load/reset ... ... ...");
+			parameters = new ArrayList<>();
+		}
+	}
+
+	public void reset() {
+		log("ParametersBean, reset ... ... ...");
+		parameters = new ArrayList<>();
 	}
 
 	public List<Parameter> getParameters() {

@@ -31,8 +31,7 @@
                              selectionMode="single" selection="#{groupsBean.selectedGroup}" rowKey="#{group.id}"
                              >
 
-                    <p:ajax event="rowSelect" listener="#{functionsBean.onRowSelect}" update="aform:ftable" />
-                    <p:ajax event="rowSelect" update="aform:ptable" />
+                    <p:ajax event="rowSelect" listener="#{groupsBean.onRowSelect}" update="aform:ftable aform:ptable" />
 
                     <p:column headerText="Group Id">
                         #{group.id}
@@ -49,7 +48,8 @@
                     <p:dataTable id="ftable" var="func" value="#{functionsBean.functions}" 
                                  selectionMode="single" selection="#{functionsBean.selectedFunction}" rowKey="#{func.id}">
 
-                        <p:ajax event="rowSelect" listener="#{parametersBean.onRowSelect}" update="aform:ptable" />
+ 
+                        <p:ajax event="rowSelect" listener="#{functionsBean.onRowSelect}" update="aform:ptable" />
 
                         <p:column headerText="Function Id">
                             #{func.id}

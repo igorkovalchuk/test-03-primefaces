@@ -1,16 +1,17 @@
 package com.example;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class FunctionsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,9 +22,13 @@ public class FunctionsBean implements Serializable {
 	@Inject
 	private GroupsBean groups;
 
+	@Inject
+	private ParametersBean parameters;
+
 	public void onRowSelect(SelectEvent event) {
-		log("FunctionsBean.onRowSelect(), Selected Group: " + ((Group) event.getObject()).getName());
-		reload();
+		Function function = (Function) event.getObject();
+		log("FunctionsBean.onGroupSelect(), Selected Group: " + function.getName());
+		parameters.reload();
 	}
 
 	@PostConstruct
@@ -32,13 +37,18 @@ public class FunctionsBean implements Serializable {
 		reload();
 	}
 
-	private void reload() {
+	public void reload() {
 		if (groups != null && groups.getSelectedGroup() != null) {
 			Group group = groups.getSelectedGroup();
 			log("FunctionsBean, load ... ... ... group = " + group.getName());
 
 			functions = DataLoader.getDataLoader().loadFunctions(group);
 		}
+		else {
+			log("FunctionsBean, load/reset ... ... ...");
+			functions = new ArrayList<>();
+		}
+		parameters.reset();
 	}
 
 	public List<Function> getFunctions() {
@@ -56,6 +66,7 @@ public class FunctionsBean implements Serializable {
 
 	public void setSelectedFunction(Function selectedFunction) {
 		this.selectedFunction = selectedFunction;
+		log("FunctionsBean setSelectedFunction " + (selectedFunction == null ? "null" : selectedFunction.getName()));
 	}
 
 	private static void log(String message) {
