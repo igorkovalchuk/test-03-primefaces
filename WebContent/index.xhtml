@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3c.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
->
-    <h:head>
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
 
-        <style>
-            .td-vertical-align-top td{
-                vertical-align: top;
-            }
-        </style>
+<style>
+.td-vertical-align-top td {
+	vertical-align: top;
+}
+</style>
 
-    </h:head>
+</h:head>
 
-    <h:body>
+<h:body>
 
-        <h:form id="aform">
+    <h:form id="aform">
 
-            <p:panel style="margin-bottom:20px">
-                <h:outputText value="#{groupsBean.databaseDetails}" />
-            </p:panel>
+        <p:panel style="margin-bottom:20px">
+            <h:outputText value="#{groupsBean.databaseDetails}" />
+        </p:panel>
 
-            <h:panelGrid columns="2"
-                         styleClass="td-vertical-align-top" >
+        <h:panelGrid columns="2"
+                     styleClass="td-vertical-align-top">
 
-                <p:dataTable id="gtable" var="group" value="#{groupsBean.groups}" 
-                             selectionMode="single" selection="#{groupsBean.selectedGroup}" rowKey="#{group.id}"
-                             >
+            <h:panelGrid columns="1">
+
+                <p:dataTable id="gtable" var="group" value="#{groupsBean.groups}"
+                    selectionMode="single" selection="#{groupsBean.selectedGroup}" rowKey="#{group.id}">
 
                     <p:ajax event="rowSelect" listener="#{groupsBean.onRowSelect}" update="aform:ftable aform:ptable" />
 
@@ -47,48 +46,54 @@
 
                 </p:dataTable>
 
-                <h:panelGrid columns="1">
+                <p />
 
-                    <p:dataTable id="ftable" var="func" value="#{functionsBean.functions}" 
-                                 selectionMode="single" selection="#{functionsBean.selectedFunction}" rowKey="#{func.id}">
-
- 
-                        <p:ajax event="rowSelect" listener="#{functionsBean.onRowSelect}" update="aform:ptable" />
-
-                        <p:column headerText="Function Id">
-                            #{func.id}
-                        </p:column>
-
-
-                        <p:column headerText="Function Name">
-                            #{func.name}
-                        </p:column>
-
-                        <p:column headerText="Active">
-                            #{func.activeMsg}
-                        </p:column>
-
-                    </p:dataTable>
-
-                    <p />
-
-                    <p:dataTable id="ptable" var="par" value="#{parametersBean.parameters}" 
-                                 selectionMode="single" selection="#{parametersBean.selectedParameter}" rowKey="#{par.id}">
-
-                        <p:column headerText="Param. Id">
-                            #{par.id}
-                        </p:column>
-
-                        <p:column headerText="Param. Name">
-                            #{par.name}
-                        </p:column>
-
-                    </p:dataTable>
-
-                </h:panelGrid>
+                <p:commandButton value="Reload Groups" update="aform:gtable" action="#{groupsBean.reload}" />
 
             </h:panelGrid>
-        </h:form>
 
-    </h:body>
+            <h:panelGrid columns="1">
+
+                <p:dataTable id="ftable" var="func" value="#{functionsBean.functions}"
+                    selectionMode="single" selection="#{functionsBean.selectedFunction}" rowKey="#{func.id}">
+
+
+                    <p:ajax event="rowSelect" listener="#{functionsBean.onRowSelect}" update="aform:ptable" />
+
+                    <p:column headerText="Function Id">
+                        #{func.id}
+                    </p:column>
+
+
+                    <p:column headerText="Function Name">
+                        #{func.name}
+                    </p:column>
+
+                    <p:column headerText="Active">
+                        #{func.activeMsg}
+                    </p:column>
+
+                </p:dataTable>
+
+                <p />
+
+                <p:dataTable id="ptable" var="par" value="#{parametersBean.parameters}"
+                    selectionMode="single" selection="#{parametersBean.selectedParameter}" rowKey="#{par.id}">
+
+                    <p:column headerText="Param. Id">
+                        #{par.id}
+                    </p:column>
+
+                    <p:column headerText="Param. Name">
+                        #{par.name}
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:panelGrid>
+
+        </h:panelGrid>
+    </h:form>
+
+</h:body>
 </html>

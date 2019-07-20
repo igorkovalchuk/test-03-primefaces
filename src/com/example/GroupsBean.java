@@ -29,7 +29,7 @@ public class GroupsBean implements Serializable {
 		reload();
 	}
 
-	private void reload() {
+	public void reload() {
 		log("GroupsBean, load ... ... ...");
 		groups = DataLoader.getDataLoader().loadGroups();
 	}
@@ -43,6 +43,7 @@ public class GroupsBean implements Serializable {
 	}
 
 	public List<Group> getGroups() {
+		log("GroupsBean ... getGroups");
 		return groups;
 	}
 
