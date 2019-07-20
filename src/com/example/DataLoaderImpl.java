@@ -21,7 +21,7 @@ public class DataLoaderImpl implements DataLoader {
 				" COUNT(f.\"ID\") as \"ALL\"," + 
 				" COUNT(CASE f.\"IS_ACTIVE\" WHEN 'N' THEN 1 ELSE NULL END) as \"INACTIVE\"" + 
 				" FROM \"GROUP_FUNCTION\" gf LEFT JOIN \"FUNCTIONS\" f ON gf.\"ID\" = f.\"ID_GROUP\"" + 
-				" GROUP BY gf.\"ID\", gf.\"NAME\", gf.\"CTIME\"" + 
+				" GROUP BY gf.\"ID\", gf.\"NAME\", gf.\"DESCR\", gf.\"CTIME\"" + 
 				" ORDER BY gf.\"ID\"";
 
     	try (Connection connection = ApplicationConfFactory.getInstance().getConnection();
