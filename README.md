@@ -6,11 +6,10 @@ How to run it locally:
  * for Oracle Database XE: copy ucp.jar and ojdbc8.jar into WebContent/WEB-INF/lib
  * for Oracle Database XE: mvn clean package -f pom-oracle.xml
  * for PostgreSQL: mvn clean package
- * specify the DATABASE_URL environment variable, for example: export DATABASE_URL=postgres://my_user:my_password@127.0.0.1/my_database 
- * Oracle DATABASE_URL, for example: export DATABASE_URL=oracle://c##dev1:12345@127.0.0.1:1521
+ * specify the DATABASE_URL environment variable, for example: export DATABASE_URL=postgres://my_user:my_password@127.0.0.1/my_database ; Oracle DATABASE_URL: export DATABASE_URL=oracle://c##dev1:12345@127.0.0.1:1521
  * cp target/test3.war ~/java/apache-tomcat-9.0.21/webapps
  * ~/java/apache-tomcat-9.0.21/bin$ ./catalina.sh run
- * P.S. don't forget to call COMMIT (after an INSERT) in Oracle Database XE;
+ * P.S. don't forget to call COMMIT (after an INSERTs) in Oracle Database XE;
 
 How to run it on Heroku:
 
@@ -24,7 +23,6 @@ How to run it on Heroku:
 TO DO:
 
  * don't reload data when selected the same row;
- * reload GroupsBean list periodically to reflect the changes in the database if any;
  * catch the ajax errors - show error messages;
  * when it loses the http connection the PrimeFaces may have an issue when selecting rows when we restore the connection;
  * shutdown UCP gracefully;
@@ -43,9 +41,8 @@ Other tasks that I had, some of them at my own discretion:
 
   * Oracle Database Express Edition installation on Debian using Docker - unsuccessfully this time;
   * configured this project to use on Heroku;
-  * looking how to use CDI in ServletContextListener/Tomcat - unsuccessfully (except CDI.current().select(Class).get());
   * looking how to use Oracle Maven Repository;
-  * configured Tomcat Database Connection Pool (DBCP 2) instead of Oracle Universal Connection Pool (UCP);
+  * configured Tomcat Database Connection Pool (DBCP 2);
   * looking how to remove the database name and password from source codes for Heroku deployment;
   * database configuration - using ServletContextListener instead of context.xml;
   * get the problem with the UTF white space in the provided documentation, like this one: create table group1 (id integer NOT NULL); create table group2 (id integer NOT NULL);
