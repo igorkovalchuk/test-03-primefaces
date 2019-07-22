@@ -6,13 +6,14 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
+
 import org.primefaces.event.SelectEvent;
 
 import com.example.util.ApplicationConfFactory;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class GroupsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
